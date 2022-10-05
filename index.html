@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BookShelf</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <!-- Font and Icon-->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+            rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="./assets/css/style.css" />
+    </head>
+    <body>
+        <header class="header">
+            <nav class="nav">
+                <div class="nav-item"><a href="#"> BookShelf </a></div>
+                <div class="nav-item">
+                    <div class="nav-btn">
+                        <span class="fas fa-plus-circle"></span>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="items-search">
+                <div class="search-icon">
+                    <span class="fas fa-search"></span>
+                </div>
+                <input type="search" class="search" placeholder="" />
+            </div>
+        </header>
+
+        <div class="wrapper">
+            <!-- Content render by javascript -->
+            <main class="content"></main>
+            <aside class="labels">
+                <div class="label-item" data-action="readed">Sudah di baca</div>
+                <div class="label-item active" data-action="unread">
+                    Belum di baca
+                </div>
+            </aside>
+        </div>
+
+        <!-- Add Book Modal -->
+        <dialog id="add" class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">Tambah Buku</div>
+                <div class="dialog-body">
+                    <div class="error"></div>
+                    <form onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="title"> Judul </label>
+                            <input
+                                type="text"
+                                name="title"
+                                class="form-control"
+                                value=""
+                                required />
+                        </div>
+                        <div class="form-group">
+                            <label for="author"> Penulis </label>
+                            <input
+                                type="text"
+                                name="author"
+                                class="form-control"
+                                value=""
+                                required />
+                        </div>
+                        <div class="form-group">
+                            <label for="author"> Tahun Terbit </label>
+                            <input
+                                type="number"
+                                name="release"
+                                class="form-control"
+                                value=""
+                                required />
+                        </div>
+                        <div class="form-group">
+                            <label for="label">
+                                Tandai sebagai <strong>sudah di baca</strong>
+                            </label>
+                            <input type="checkbox" name="label" />
+                        </div>
+                        <div class="form-group">
+                            <button
+                                type="submit"
+                                data-submit="add"
+                                class="button primary">
+                                Simpan
+                            </button>
+                            <button
+                                type="button"
+                                data-dismiss="dialog"
+                                class="button">
+                                Batal
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="edit" class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">Edit Buku</div>
+                <div class="dialog-body">
+                    <form onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="title"> Judul Buku </label>
+                            <input
+                                type="text"
+                                name="title"
+                                class="form-control"
+                                value=""
+                                required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="author"> Penulis </label>
+                            <input
+                                type="text"
+                                name="author"
+                                class="form-control"
+                                value=""
+                                required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="release"> Rilis </label>
+                            <input
+                                type="number"
+                                name="release"
+                                class="form-control"
+                                value=""
+                                required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="label">
+                                Tandai sebagai <strong>sudah di baca</strong>
+                            </label>
+                            <input type="checkbox" name="label" />
+                        </div>
+
+                        <div class="form-group">
+                            <button
+                                type="submit"
+                                data-submit="edit"
+                                class="button primary">
+                                Simpan
+                            </button>
+                            <button
+                                type="button"
+                                data-dismiss="dialog"
+                                class="button">
+                                Batal
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="delete" class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">Konfirmasi Hapus</div>
+                <div class="dialog-body">
+                    <p>Apakah anda yakin ingin menghapus buku ini ?</p>
+
+                    <div class="form-group">
+                        <button
+                            type="button"
+                            class="button primary"
+                            data-submit="delete">
+                            Hapus
+                        </button>
+                        <button
+                            type="button"
+                            class="button"
+                            data-dismiss="dialog">
+                            Batal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="unread" class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">Konfirmasi</div>
+                <div class="dialog-body">
+                    <p>
+                        Pindahkan buku ini ke dalam label
+                        <strong> Belum selesai di baca </strong> ?
+                    </p>
+
+                    <div class="form-group">
+                        <button
+                            type="button"
+                            class="button primary"
+                            data-submit="unread">
+                            Pindahkan
+                        </button>
+                        <button
+                            type="button"
+                            class="button"
+                            data-dismiss="dialog">
+                            Batal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="readed" class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">Konfirmasi</div>
+                <div class="dialog-body">
+                    <p>
+                        Pindahkan buku ini ke dalam label
+                        <strong> Sudah selesai di baca </strong> ?
+                    </p>
+
+                    <div class="form-group">
+                        <button
+                            type="button"
+                            class="button primary"
+                            data-submit="readed">
+                            Pindahkan
+                        </button>
+                        <button
+                            type="button"
+                            class="button"
+                            data-dismiss="dialog">
+                            Batal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </dialog>
+
+        <script type="module" src="./assets/js/scripts.js"></script>
+    </body>
+</html>
