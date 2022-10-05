@@ -9,4 +9,4 @@ Feature
 3. Search book
 4. Responsive Design
 
-> this project is the result of submitting an assignment to dicoding.com in a basic front end creation class
+> this project is the result of submitting an assignment to **dicoding.com** in a basic front end creation class
